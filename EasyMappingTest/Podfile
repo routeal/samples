@@ -1,6 +1,5 @@
-target 'PodTest' do
+target 'EasyMappingTest' do
   pod 'EasyMapping'
 end
 
 use_frameworks!
-
