@@ -12,11 +12,13 @@
 
 ### 3. Create a Podfile in the project
 
+```
 target 'PodTest' do
   pod 'EasyMapping'
 end
 
 use_frameworks!
+```
 
 use_frameworks! is required.
 

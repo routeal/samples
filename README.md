@@ -2,12 +2,12 @@
 
 > Notes for myself
 
-* 1. NoStroyBoard: no storyboard with UINavigationController
+* NoStroyBoard: no storyboard, programmatic ui development (UINavigationController)
 
-* 2. TabBar: no storyboard with UITabBarController
+* TabBar: no storyboard, programmatic ui development (UITabBarController)
 
-* 3. PodTest: add a new opensource library from CocoaPods
+* PodTest: how to pod, add a new open-source library from CocoaPods
 
-* 4. EasyMappingTest: EasyMapping demo
+* EasyMappingTest: EasyMapping demo, json dictionary to object mapping
 
-
+* EasyMappingCoreData: EasyMapping with CoreData, json object mapping with data saving
