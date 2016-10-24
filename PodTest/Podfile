@@ -1,0 +1,4 @@
+target 'PodTest' do
+  pod 'EasyMapping'
+end
+
