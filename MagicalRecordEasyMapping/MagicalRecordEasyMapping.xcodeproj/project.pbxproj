@@ -12,6 +12,9 @@
 		0B06335D1DC2DC0F0000E531 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B06335B1DC2DC0F0000E531 /* Main.storyboard */; };
 		0B06335F1DC2DC0F0000E531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B06335E1DC2DC0F0000E531 /* Assets.xcassets */; };
 		0B0633621DC2DC0F0000E531 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B0633601DC2DC0F0000E531 /* LaunchScreen.storyboard */; };
+		0B06336B1DC2DDCF0000E531 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B0633691DC2DDCF0000E531 /* Model.xcdatamodeld */; };
+		0B06336E1DC2DF5B0000E531 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B06336C1DC2DF5B0000E531 /* Model.xcdatamodeld */; };
+		A22349ADDE5238271DBC4E03 /* Pods_MagicalRecordEasyMapping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29147CA7EAC0541DA7D69E37 /* Pods_MagicalRecordEasyMapping.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,11 @@
 		0B06335E1DC2DC0F0000E531 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B0633611DC2DC0F0000E531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0B0633631DC2DC0F0000E531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B06336A1DC2DDCF0000E531 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		0B06336D1DC2DF5B0000E531 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		131C61DC8A572091A35BA904 /* Pods-MagicalRecordEasyMapping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicalRecordEasyMapping.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MagicalRecordEasyMapping/Pods-MagicalRecordEasyMapping.debug.xcconfig"; sourceTree = "<group>"; };
+		29147CA7EAC0541DA7D69E37 /* Pods_MagicalRecordEasyMapping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MagicalRecordEasyMapping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9CEB8166B489317BB4E06C4 /* Pods-MagicalRecordEasyMapping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicalRecordEasyMapping.release.xcconfig"; path = "Pods/Target Support Files/Pods-MagicalRecordEasyMapping/Pods-MagicalRecordEasyMapping.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A22349ADDE5238271DBC4E03 /* Pods_MagicalRecordEasyMapping.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,8 +47,11 @@
 		0B06334B1DC2DC0F0000E531 = {
 			isa = PBXGroup;
 			children = (
+				0B0633691DC2DDCF0000E531 /* Model.xcdatamodeld */,
 				0B0633561DC2DC0F0000E531 /* MagicalRecordEasyMapping */,
 				0B0633551DC2DC0F0000E531 /* Products */,
+				C8FE19468B3479BAEB0746D5 /* Pods */,
+				BD44DF1F90BEC05B483F2136 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +72,26 @@
 				0B06335E1DC2DC0F0000E531 /* Assets.xcassets */,
 				0B0633601DC2DC0F0000E531 /* LaunchScreen.storyboard */,
 				0B0633631DC2DC0F0000E531 /* Info.plist */,
+				0B06336C1DC2DF5B0000E531 /* Model.xcdatamodeld */,
 			);
 			path = MagicalRecordEasyMapping;
+			sourceTree = "<group>";
+		};
+		BD44DF1F90BEC05B483F2136 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29147CA7EAC0541DA7D69E37 /* Pods_MagicalRecordEasyMapping.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C8FE19468B3479BAEB0746D5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				131C61DC8A572091A35BA904 /* Pods-MagicalRecordEasyMapping.debug.xcconfig */,
+				A9CEB8166B489317BB4E06C4 /* Pods-MagicalRecordEasyMapping.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B0633661DC2DC0F0000E531 /* Build configuration list for PBXNativeTarget "MagicalRecordEasyMapping" */;
 			buildPhases = (
+				3A1EC7ADB65C61BCF5F833D1 /* [CP] Check Pods Manifest.lock */,
 				0B0633501DC2DC0F0000E531 /* Sources */,
 				0B0633511DC2DC0F0000E531 /* Frameworks */,
 				0B0633521DC2DC0F0000E531 /* Resources */,
+				EFF43BA39CBCF877B0190D72 /* [CP] Embed Pods Frameworks */,
+				B123A768EF544FB80C9CB5EA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +164,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3A1EC7ADB65C61BCF5F833D1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B123A768EF544FB80C9CB5EA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MagicalRecordEasyMapping/Pods-MagicalRecordEasyMapping-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFF43BA39CBCF877B0190D72 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MagicalRecordEasyMapping/Pods-MagicalRecordEasyMapping-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0B0633501DC2DC0F0000E531 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -138,6 +219,8 @@
 			files = (
 				0B06335A1DC2DC0F0000E531 /* ViewController.swift in Sources */,
 				0B0633581DC2DC0F0000E531 /* AppDelegate.swift in Sources */,
+				0B06336B1DC2DDCF0000E531 /* Model.xcdatamodeld in Sources */,
+				0B06336E1DC2DF5B0000E531 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +341,7 @@
 		};
 		0B0633671DC2DC0F0000E531 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 131C61DC8A572091A35BA904 /* Pods-MagicalRecordEasyMapping.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MagicalRecordEasyMapping/Info.plist;
@@ -270,6 +354,7 @@
 		};
 		0B0633681DC2DC0F0000E531 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9CEB8166B489317BB4E06C4 /* Pods-MagicalRecordEasyMapping.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MagicalRecordEasyMapping/Info.plist;
@@ -299,8 +384,32 @@
 				0B0633681DC2DC0F0000E531 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0B0633691DC2DDCF0000E531 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0B06336A1DC2DDCF0000E531 /* Model.xcdatamodel */,
+			);
+			currentVersion = 0B06336A1DC2DDCF0000E531 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		0B06336C1DC2DF5B0000E531 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0B06336D1DC2DF5B0000E531 /* Model.xcdatamodel */,
+			);
+			currentVersion = 0B06336D1DC2DF5B0000E531 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0B06334C1DC2DC0F0000E531 /* Project object */;
 }

@@ -1,0 +1,6 @@
+target 'MagicalRecordEasyMapping' do
+  pod 'EasyMapping'
+  pod 'MagicalRecord'
+end
+
+use_frameworks!
