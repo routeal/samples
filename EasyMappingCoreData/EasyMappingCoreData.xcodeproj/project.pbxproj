@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B06334A1DC2D98B0000E531 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B0633481DC2D98B0000E531 /* Model.xcdatamodeld */; };
 		0B335B4E1DBDF8C000529B2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B335B4D1DBDF8C000529B2E /* AppDelegate.swift */; };
 		0B335B501DBDF8C000529B2E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B335B4F1DBDF8C000529B2E /* ViewController.swift */; };
 		0B335B531DBDF8C000529B2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B335B511DBDF8C000529B2E /* Main.storyboard */; };
 		0B335B551DBDF8C000529B2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B335B541DBDF8C000529B2E /* Assets.xcassets */; };
 		0B335B581DBDF8C000529B2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B335B561DBDF8C000529B2E /* LaunchScreen.storyboard */; };
+		1077CB4AB3B914397F50FB5A /* Pods_EasyMappingCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5D783124754CB72ACBD33F /* Pods_EasyMappingCoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B0633491DC2D98B0000E531 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		0B335B4A1DBDF8C000529B2E /* EasyMappingCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyMappingCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B335B4D1DBDF8C000529B2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B335B4F1DBDF8C000529B2E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,9 @@
 		0B335B541DBDF8C000529B2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B335B571DBDF8C000529B2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0B335B591DBDF8C000529B2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F5D783124754CB72ACBD33F /* Pods_EasyMappingCoreData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyMappingCoreData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87CEDB60EFAE7FBAD2A74CEF /* Pods-EasyMappingCoreData.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyMappingCoreData.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyMappingCoreData/Pods-EasyMappingCoreData.debug.xcconfig"; sourceTree = "<group>"; };
+		EFC760F76039CCA8011CB180 /* Pods-EasyMappingCoreData.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyMappingCoreData.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyMappingCoreData/Pods-EasyMappingCoreData.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1077CB4AB3B914397F50FB5A /* Pods_EasyMappingCoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				0B335B4C1DBDF8C000529B2E /* EasyMappingCoreData */,
 				0B335B4B1DBDF8C000529B2E /* Products */,
+				15750096589F6DDC22278A57 /* Pods */,
+				8DDC7D6D85F42EB1826735AB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +69,26 @@
 				0B335B541DBDF8C000529B2E /* Assets.xcassets */,
 				0B335B561DBDF8C000529B2E /* LaunchScreen.storyboard */,
 				0B335B591DBDF8C000529B2E /* Info.plist */,
+				0B0633481DC2D98B0000E531 /* Model.xcdatamodeld */,
 			);
 			path = EasyMappingCoreData;
+			sourceTree = "<group>";
+		};
+		15750096589F6DDC22278A57 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				87CEDB60EFAE7FBAD2A74CEF /* Pods-EasyMappingCoreData.debug.xcconfig */,
+				EFC760F76039CCA8011CB180 /* Pods-EasyMappingCoreData.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8DDC7D6D85F42EB1826735AB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F5D783124754CB72ACBD33F /* Pods_EasyMappingCoreData.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B335B5C1DBDF8C000529B2E /* Build configuration list for PBXNativeTarget "EasyMappingCoreData" */;
 			buildPhases = (
+				AA3A1C92E3BA2C2DFA4E865B /* [CP] Check Pods Manifest.lock */,
 				0B335B461DBDF8C000529B2E /* Sources */,
 				0B335B471DBDF8C000529B2E /* Frameworks */,
 				0B335B481DBDF8C000529B2E /* Resources */,
+				B9E7801D49491369AA93FC9B /* [CP] Embed Pods Frameworks */,
+				211FCEACC4E021434BD7DB97 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +161,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		211FCEACC4E021434BD7DB97 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyMappingCoreData/Pods-EasyMappingCoreData-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA3A1C92E3BA2C2DFA4E865B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B9E7801D49491369AA93FC9B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyMappingCoreData/Pods-EasyMappingCoreData-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0B335B461DBDF8C000529B2E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -138,6 +216,7 @@
 			files = (
 				0B335B501DBDF8C000529B2E /* ViewController.swift in Sources */,
 				0B335B4E1DBDF8C000529B2E /* AppDelegate.swift in Sources */,
+				0B06334A1DC2D98B0000E531 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +337,7 @@
 		};
 		0B335B5D1DBDF8C000529B2E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87CEDB60EFAE7FBAD2A74CEF /* Pods-EasyMappingCoreData.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = EasyMappingCoreData/Info.plist;
@@ -270,6 +350,7 @@
 		};
 		0B335B5E1DBDF8C000529B2E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFC760F76039CCA8011CB180 /* Pods-EasyMappingCoreData.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = EasyMappingCoreData/Info.plist;
@@ -299,8 +380,22 @@
 				0B335B5E1DBDF8C000529B2E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0B0633481DC2D98B0000E531 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0B0633491DC2D98B0000E531 /* Model.xcdatamodel */,
+			);
+			currentVersion = 0B0633491DC2D98B0000E531 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0B335B421DBDF8C000529B2E /* Project object */;
 }
