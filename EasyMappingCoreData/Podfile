@@ -1,5 +1,0 @@
-target 'EasyMappingCoreData' do
-  pod 'EasyMapping'
-end
-
-use_frameworks!
