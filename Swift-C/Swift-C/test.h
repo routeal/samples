@@ -1,0 +1,70 @@
+#pragma once
+
+//#pragma pack(1)
+
+#include <stddef.h>
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+extern char *gstr;
+extern const char *cgstr;
+
+typedef struct CStruct
+{
+  int i;
+  char *str;
+  char buf[512];
+} CStruct;
+
+
+extern void printswift(const char *s);
+
+extern void printstruct(const CStruct *t);
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+typedef struct
+{
+    int32_t m_Int;
+    int64_t m_Long;
+    int16_t m_Array[3];
+} APIStruct;
+
+typedef void (*callback01) ( void * );
+
+int CUseCallback( callback01, int );
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+typedef int (*callback02) (const char *str, unsigned int size);
+
+void CallStrCallback(callback02 c);
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+typedef struct Data
+{
+  int i;
+} Data;
+
+
+typedef void (*func_callback) ( void *data );
+
+typedef struct cfunc_struct {
+  int (*func1) (const char *str, unsigned int siz);
+  int (*func2) (const char *str, unsigned int siz);
+  int (*func3) (func_callback f, void *data);
+} cfunc_struct;
+
+void CallCFunc(const cfunc_struct *c);
