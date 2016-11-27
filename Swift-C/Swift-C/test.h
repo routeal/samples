@@ -63,8 +63,24 @@ typedef void (*func_callback) ( void *data );
 
 typedef struct cfunc_struct {
   int (*func1) (const char *str, unsigned int siz);
-  int (*func2) (const char *str, unsigned int siz);
+  int (*func2) (char *str, unsigned int siz);
   int (*func3) (func_callback f, void *data);
+  void * (*func4) ();
+  void (*func5) (void *ptr);
 } cfunc_struct;
 
 void CallCFunc(const cfunc_struct *c);
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+typedef struct cfunc_timer {
+  void * (*create_timer) (func_callback f, void *data, unsigned int delay, unsigned int interval);
+  void (*destroy_timer) (void *ptr);
+} cfunc_timer;
+
+void CreateTimerFunc(const cfunc_timer *t);
+void DestroyTimerFunc();
+

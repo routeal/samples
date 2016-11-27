@@ -207,7 +207,7 @@ CallStrCallback( StrCallback )
 
 var cf1 = cfunc_struct();
 
-func cf_cb( str : UnsafePointer<CChar>?, size: UInt32 ) -> Int32
+func cf_cb1( str : UnsafePointer<CChar>?, size: UInt32 ) -> Int32
 {
     let s: String = String.init(cString: str!)
     print(s)
@@ -215,14 +215,111 @@ func cf_cb( str : UnsafePointer<CChar>?, size: UInt32 ) -> Int32
     return 0
 }
 
-func cf_func_cb( f: func_callback?, data: UnsafeMutableRawPointer? ) -> Int32
+func cf_cb2( str : UnsafeMutablePointer<Int8>?, size: UInt32 ) -> Int32
+{
+    let s: String = String.init(cString: str!)
+    print(s)
+    print(size)
+    return 0
+}
+
+func cf_cb3( f: func_callback?, data: UnsafeMutableRawPointer? ) -> Int32
 {
     f!(data);
     return 0
 }
 
-cf1.func1 = cf_cb
-cf1.func2 = cf_cb
-cf1.func3 = cf_func_cb
+struct MySwiftStruct
+{
+    var tako:Int32 = 32
+}
 
-CallCFunc(&cf1);
+var mp = MySwiftStruct()
+
+func cf_cb4() -> UnsafeMutableRawPointer?
+{
+    print("func4 \(mp.tako)");
+    let vp = withUnsafeMutablePointer(to: &mp) { (pp) -> UnsafeMutableRawPointer in
+        return UnsafeMutableRawPointer(pp)
+    }
+    return UnsafeMutableRawPointer(vp)
+}
+
+func cf_cb5(ptr: UnsafeMutableRawPointer? ) -> Void
+{
+    if let pp = ptr {
+        let p = UnsafeRawPointer(pp).load(as: MySwiftStruct.self)
+        print("func5 \(p.tako)")
+    }
+}
+
+cf1.func1 = cf_cb1
+cf1.func2 = cf_cb2
+cf1.func3 = cf_cb3
+cf1.func4 = cf_cb4
+cf1.func5 = cf_cb5
+
+CallCFunc(&cf1)
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// timer function
+//
+////////////////////////////////////////////////////////////////////////////////
+
+
+class TimerTest {
+    var timer: Timer!
+
+    var cb: func_callback?
+
+    var data: UnsafeMutableRawPointer?
+
+    init() {}
+
+    init(cb: func_callback?, data: UnsafeMutableRawPointer?) {
+        self.cb = cb
+        self.data = data
+    }
+
+    func start() {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
+                                     selector: #selector(self.update), userInfo: nil, repeats: true)
+        timer.fire()
+    }
+
+    func done() {
+        timer.invalidate()
+    }
+
+    @objc func update(tm: Timer) {
+        print("timer")
+        if let f = cb {
+            f(data!)
+        }
+    }
+}
+
+var ttt:TimerTest = TimerTest()
+
+func create_timer(f: func_callback?, data: UnsafeMutableRawPointer?, delay: UInt32, interval: UInt32) -> UnsafeMutableRawPointer?
+{
+    ttt.cb = f
+    ttt.data = data
+    ttt.start()
+    return Unmanaged.passRetained(ttt).toOpaque()
+}
+
+func destroy_timer(handle: UnsafeMutableRawPointer?) -> Void
+{
+    ttt.done()
+}
+
+var ft = cfunc_timer();
+ft.create_timer = create_timer
+ft.destroy_timer = destroy_timer
+CreateTimerFunc(&ft)
+
+CFRunLoopRun()
