@@ -1,0 +1,5 @@
+module ccl [system] {
+       header "ccl.h"
+       link "ccl"
+       export *
+}
