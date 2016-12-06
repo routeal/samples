@@ -176,7 +176,7 @@ struct ConvivaClientPlatformInterface {
     var saveConfig      : ((String, Int) -> (Int))?
     var loadConfig      : ((String, Int) -> (Int))?
     var sendHeartbeat   : ((String, String, String, Int) -> (Int))?
-    var createTimer     : ((@escaping TimerCallbackFunc, Any?, Int, Int) -> (Any))?
+    var createTimer     : ((@escaping TimerCallbackFunc, Any, Int, Int) -> (Any))?
     var destroyTimer    : ((Any?) -> Void)?
 }
 
@@ -233,18 +233,18 @@ func send_heartbeat(url: UnsafePointer<CChar>?, content_type: UnsafePointer<CCha
 func create_timer(callback: ccl_timer_callback?, data: UnsafeMutableRawPointer?,
                   initial_time: UInt32, interval: UInt32) -> UnsafeMutableRawPointer?
 {
-    if let createTimerFunc = createTimerImpl {
+    if let createTimerFunc = createTimerImpl, let _callback = callback, let _data = data {
 
         // bridge ccl_timer_callback with TimerCallbackFunc
-        let timerCallbackBridge: (Any?) -> Void = {
-            (arg: Any?) -> Void in
-            if let cb = callback {
-                cb(arg as! UnsafeMutableRawPointer?);
+        let timerCallbackBridge: (Any?) -> Void = { (arg: Any?) -> Void in
+            if let _arg = arg {
+                let d = _arg as? UnsafeMutableRawPointer
+                _callback(d)
+                //_callback(Unmanaged<AnyObject>.passRetained(_arg as AnyObject).toOpaque())
             }
         }
 
-        let obj = createTimerFunc(timerCallbackBridge, data as Any,
-                                  Int(initial_time), Int(interval))
+        let obj = createTimerFunc(timerCallbackBridge, _data as Any, Int(initial_time), Int(interval))
 
         return Unmanaged<AnyObject>.passRetained(obj as AnyObject).toOpaque()
     }
@@ -253,8 +253,8 @@ func create_timer(callback: ccl_timer_callback?, data: UnsafeMutableRawPointer?,
 
 func destroy_timer(timer_handle: UnsafeMutableRawPointer?)
 {
-    if let destroyTimerFunc = destroyTimerImpl {
-        destroyTimerFunc(Unmanaged<AnyObject>.fromOpaque(timer_handle!).takeRetainedValue())
+    if let destroyTimerFunc = destroyTimerImpl, let handle = timer_handle {
+        destroyTimerFunc(Unmanaged<AnyObject>.fromOpaque(handle).takeRetainedValue())
     }
 }
 
@@ -445,11 +445,65 @@ class ConvivaClientSession {
                            Unmanaged<AnyObject>.passRetained(player as AnyObject).toOpaque())
     }
 
+    var playback_state: ConvivaClientPlayerState {
+        get {
+            return ConvivaClientPlayerState.CCL_UNKNOWN
+        }
+        set (state) {
+            ccl_session_update_playback_state(session, Int32(state.rawValue))
+        }
+    }
+
+    var duration: Int {
+        get {
+            return -1
+        }
+        set (d) {
+            ccl_session_update_duration(session, Int32(d))
+        }
+    }
+
+    var framerate: Int {
+        get {
+            return -1
+        }
+        set (f) {
+            ccl_session_update_framerate(session, Int32(f))
+        }
+    }
+
+    var bitrate: Int {
+        get {
+            return -1
+        }
+        set (b) {
+            ccl_session_update_bitrate(session, Int32(b))
+        }
+    }
+
+    var cdn: String {
+        get {
+            return String()
+        }
+        set (s) {
+            ccl_session_update_cdn(session, UnsafeMutablePointer(mutating: cdn))
+        }
+    }
+
+    var resource: String {
+        get {
+            return String()
+        }
+        set (s) {
+            ccl_session_update_cdn(session, UnsafeMutablePointer(mutating: resource))
+        }
+    }
+
     func detach() {
-        ccl_session_detach(session);
+        ccl_session_detach(session)
     }
 
     func destroy() {
-        ccl_session_destroy(session);
+        ccl_session_destroy(session)
     }
 }

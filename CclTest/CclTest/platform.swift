@@ -18,6 +18,8 @@ func loadConfig(str:String, size: Int) -> Int
 
 func sendHeartbeat(url:String, type:String, heartbeat:String, size:Int) -> Int
 {
+    let randomNumber = TimeInterval(arc4random_uniform(UInt32(3)))
+    Thread.sleep(forTimeInterval: randomNumber)
     print("\(heartbeat)")
     return 0;
 }
@@ -66,14 +68,14 @@ class TimerWrapper {
     }
 
     @objc func update(tm: Timer) {
-        if let f = callback {
+        if let _callback = callback, let _data = data {
             print("kita")
-            f(data)
+            _callback(_data)
         }
     }
 }
 
-func createTimer(callback: @escaping TimerCallbackFunc, data:Any?, delay:Int, interval:Int) -> Any
+func createTimer(callback: @escaping TimerCallbackFunc, data:Any, delay:Int, interval:Int) -> Any
 {
     print("createTimer")
     let tw = TimerWrapper()

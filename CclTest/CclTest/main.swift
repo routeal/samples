@@ -78,19 +78,20 @@ let ccl = ConvivaClientLibrary(settings: settings, pm: pm, pif: pif)
 
 let group = DispatchGroup()
 
-let NUM_SESSIONS = 1
+let NUM_SESSIONS = 2
+let NUM_ITERATIONS = 10
 
 for queue_index in 1...NUM_SESSIONS {
     var label: String = "com.conviva.ccl.queue\(queue_index)"
     let queue = DispatchQueue(label: label)
     queue.async(group: group) {
         var cci = ConvivaClientContentInformation()
-        cci.asset_name = ""
-        cci.player_name = ""
-        cci.viewer_id = ""
-        cci.cdn_name = ""
-        cci.media_resource = ""
-        cci.media_url = ""
+        cci.asset_name = "Jason Borne"
+        cci.player_name = "C Demo Player"
+        cci.viewer_id = "1234"
+        cci.cdn_name = "other"
+        cci.media_resource = "http://tako.com/ika"
+        cci.media_url = "http://tako.com/ika"
         cci.media_duration = 1000;
         cci.media_bitrate = 3000;
         cci.media_is_live = false;
@@ -104,11 +105,28 @@ for queue_index in 1...NUM_SESSIONS {
 
         session.attach(pif: playerIf, player: player)
 
-        for i in 1...100 {
+        let randomNumber = TimeInterval(arc4random_uniform(UInt32(3)))
+        Thread.sleep(forTimeInterval: randomNumber)
+
+        for i in 1...NUM_ITERATIONS {
+            switch i % 6 {
+            case 0: session.playback_state = ConvivaClientPlayerState.CCL_STOPPED
+            case 1: session.playback_state = ConvivaClientPlayerState.CCL_PLAYING
+            case 2: session.playback_state = ConvivaClientPlayerState.CCL_BUFFERING
+            case 3: session.playback_state = ConvivaClientPlayerState.CCL_PAUSED
+            case 4: session.playback_state = ConvivaClientPlayerState.CCL_NOTMONITORED
+            case 5: session.playback_state = ConvivaClientPlayerState.CCL_UNKNOWN
+            default: break
+            }
+            let randomNumber = TimeInterval(arc4random_uniform(UInt32(3)))
+            Thread.sleep(forTimeInterval: randomNumber)
             print("A:\(i)")
         }
 
         session.detach()
+
+        let randomNumber2 = TimeInterval(arc4random_uniform(UInt32(3)))
+        Thread.sleep(forTimeInterval: randomNumber2)
 
         session.destroy()
     }
