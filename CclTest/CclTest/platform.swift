@@ -27,9 +27,9 @@ func sendHeartbeat(url:String, type:String, heartbeat:String, size:Int) -> Int
 class TimerWrapper {
     var timer: Timer!
     var callback: TimerCallbackFunc?
-    var data: Any?
-    var delay: Int?
-    var interval: Int?
+    var data: Any? // session pointer from C
+    var delay: Int? // milliseconds
+    var interval: Int? // milliseconds
     var task: DispatchWorkItem!
 
     init() {
@@ -48,9 +48,9 @@ class TimerWrapper {
     }
 
     func startTimer() {
-        var defaultInterval: Double = 20.0
+        var defaultInterval: Double = 20.0  // in second
         if let i = interval {
-            if i > 1000 {
+            if i > 1000 && i != 20000 {
                 defaultInterval = Double(i) / 1000.0;
             }
         }
@@ -60,7 +60,6 @@ class TimerWrapper {
     }
 
     func done() {
-        print("timer done")
         task.cancel()
         if let t = timer {
             t.invalidate()
@@ -69,7 +68,6 @@ class TimerWrapper {
 
     @objc func update(tm: Timer) {
         if let _callback = callback, let _data = data {
-            print("kita")
             _callback(_data)
         }
     }
@@ -77,7 +75,6 @@ class TimerWrapper {
 
 func createTimer(callback: @escaping TimerCallbackFunc, data:Any, delay:Int, interval:Int) -> Any
 {
-    print("createTimer")
     let tw = TimerWrapper()
     tw.callback = callback
     tw.data = data
@@ -89,9 +86,7 @@ func createTimer(callback: @escaping TimerCallbackFunc, data:Any, delay:Int, int
 
 func destroyTimer(handle: Any?) -> Void
 {
-    print("destroyTimer")
     if let tw = handle as? TimerWrapper {
-        print("destroyTimer 2")
         tw.done()
     }
 }

@@ -44,7 +44,7 @@ struct TestPlayer {
     var count: Int!
 }
 
-func getPlayheadTime(data: Any?) -> Int
+func getPlayheadTime(data: AnyObject?) -> Int
 {
     var ret: Int = 0;
     if var player = data as? TestPlayer {
@@ -56,12 +56,12 @@ func getPlayheadTime(data: Any?) -> Int
     return ret
 }
 
-func getBufferedTime(data: Any?) -> Int
+func getBufferedTime(data: AnyObject?) -> Int
 {
     return 1000
 }
 
-func getFramerate(data: Any?) -> Int
+func getFramerate(data: AnyObject?) -> Int
 {
     return 500
 }
@@ -78,7 +78,7 @@ let ccl = ConvivaClientLibrary(settings: settings, pm: pm, pif: pif)
 
 let group = DispatchGroup()
 
-let NUM_SESSIONS = 2
+let NUM_SESSIONS = 1
 let NUM_ITERATIONS = 10
 
 for queue_index in 1...NUM_SESSIONS {
@@ -103,7 +103,7 @@ for queue_index in 1...NUM_SESSIONS {
         player.state = ConvivaClientPlayerState.CCL_UNKNOWN
         player.count = 0
 
-        session.attach(pif: playerIf, player: player)
+        session.attach(playerInterface: playerIf, playerData: player as AnyObject)
 
         let randomNumber = TimeInterval(arc4random_uniform(UInt32(3)))
         Thread.sleep(forTimeInterval: randomNumber)

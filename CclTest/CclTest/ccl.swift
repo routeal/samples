@@ -240,7 +240,6 @@ func create_timer(callback: ccl_timer_callback?, data: UnsafeMutableRawPointer?,
             if let _arg = arg {
                 let d = _arg as? UnsafeMutableRawPointer
                 _callback(d)
-                //_callback(Unmanaged<AnyObject>.passRetained(_arg as AnyObject).toOpaque())
             }
         }
 
@@ -260,35 +259,35 @@ func destroy_timer(timer_handle: UnsafeMutableRawPointer?)
 
 
 struct ConvivaClientPlayerInterface {
-    var getPlayheadTime : ((Any?) -> (Int))?
-    var getBufferedTime : ((Any?) -> (Int))?
-    var getFramerate    : ((Any?) -> (Int))?
+    var getPlayheadTime : ((AnyObject?) -> (Int))?
+    var getBufferedTime : ((AnyObject?) -> (Int))?
+    var getFramerate    : ((AnyObject?) -> (Int))?
 }
 
-var getPlayheadTimeImpl : ((Any?) -> (Int))?
-var getBufferedTimeImpl : ((Any?) -> (Int))?
-var getFramerateImpl    : ((Any?) -> (Int))?
+var getPlayheadTimeImpl : ((AnyObject?) -> (Int))?
+var getBufferedTimeImpl : ((AnyObject?) -> (Int))?
+var getFramerateImpl    : ((AnyObject?) -> (Int))?
 
 func get_playhead_time(data: UnsafeMutableRawPointer?) -> Int32
 {
-    if let getPlayheadTimeFunc = getPlayheadTimeImpl {
-        return Int32(getPlayheadTimeFunc(Unmanaged<AnyObject>.fromOpaque(data!).takeRetainedValue()))
+    if let getPlayheadTimeFunc = getPlayheadTimeImpl, let d = data {
+        return Int32(getPlayheadTimeFunc(Unmanaged<AnyObject>.fromOpaque(d).takeRetainedValue()))
     }
     return 0
 }
 
 func get_buffered_time(data: UnsafeMutableRawPointer?) -> Int32
 {
-    if let getBufferedTimeFunc = getBufferedTimeImpl {
-        return Int32(getBufferedTimeFunc(Unmanaged<AnyObject>.fromOpaque(data!).takeRetainedValue()))
+    if let getBufferedTimeFunc = getBufferedTimeImpl, let d = data {
+        return Int32(getBufferedTimeFunc(Unmanaged<AnyObject>.fromOpaque(d).takeRetainedValue()))
     }
     return 0
 }
 
 func get_framerate(data: UnsafeMutableRawPointer?) -> Int32
 {
-    if let getFramerateFunc =  getFramerateImpl{
-        return Int32(getFramerateFunc(Unmanaged<AnyObject>.fromOpaque(data!).takeRetainedValue()))
+    if let getFramerateFunc = getFramerateImpl, let d = data {
+        return Int32(getFramerateFunc(Unmanaged<AnyObject>.fromOpaque(d).takeRetainedValue()))
     }
     return 0
 }
@@ -424,25 +423,26 @@ struct ConvivaClientContentInformation {
     }
 }
 
+    var player: ccl_player = ccl_player()
+
 class ConvivaClientSession {
-    var session: OpaquePointer!
+    var session: OpaquePointer
 
     init(content: ConvivaClientContentInformation) {
         session = ccl_session_create(content.metadata, nil)
+
+        //player = ccl_player()
+        player.get_playhead_time = get_playhead_time
+        player.get_buffered_time =  get_buffered_time
+        player.get_framerate = get_framerate
     }
 
-    func attach(pif: ConvivaClientPlayerInterface, player: Any) {
-        getPlayheadTimeImpl = pif.getPlayheadTime
-        getBufferedTimeImpl = pif.getBufferedTime
-        getFramerateImpl = pif.getFramerate
+    func attach(playerInterface: ConvivaClientPlayerInterface, playerData: AnyObject) {
+        getPlayheadTimeImpl = playerInterface.getPlayheadTime
+        getBufferedTimeImpl = playerInterface.getBufferedTime
+        getFramerateImpl = playerInterface.getFramerate
 
-        var pif = ccl_player()
-        pif.get_playhead_time = get_playhead_time
-        pif.get_buffered_time =  get_buffered_time
-        pif.get_framerate = get_framerate
-
-        ccl_session_attach(session, &pif,
-                           Unmanaged<AnyObject>.passRetained(player as AnyObject).toOpaque())
+        ccl_session_attach(session, &player, Unmanaged.passRetained(playerData).toOpaque())
     }
 
     var playback_state: ConvivaClientPlayerState {
