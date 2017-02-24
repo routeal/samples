@@ -78,8 +78,8 @@ let ccl = ConvivaClientLibrary(settings: settings, pm: pm, pif: pif)
 
 let group = DispatchGroup()
 
-let NUM_SESSIONS = 1
-let NUM_ITERATIONS = 10
+let NUM_SESSIONS = 8
+let NUM_ITERATIONS = 50
 
 for queue_index in 1...NUM_SESSIONS {
     var label: String = "com.conviva.ccl.queue\(queue_index)"
@@ -125,8 +125,13 @@ for queue_index in 1...NUM_SESSIONS {
 
         session.detach()
 
+        // flush events and stop the timer
+        session.end()
+
+        /*
         let randomNumber2 = TimeInterval(arc4random_uniform(UInt32(3)))
         Thread.sleep(forTimeInterval: randomNumber2)
+        */
 
         session.destroy()
     }

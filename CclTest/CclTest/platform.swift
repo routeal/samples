@@ -16,11 +16,51 @@ func loadConfig(str:String, size: Int) -> Int
     return 0
 }
 
+// convert json string to dictionary
+func convertToDictionary(text: String) -> [String: Any]? {
+    if let data = text.data(using: .utf8) {
+        do {
+            return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    return nil
+}
+
+func receiveResponse(id: Int)
+{
+    //print("receiveResponse: \(id)")
+
+    let dic: [String: Any] = [
+      "sid": id,
+      "t": "CwsServerResponse",
+      "err": "ok",
+      "clid": "1976252.6667240.1322884.12345678",
+    ]
+
+    do {
+        let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
+        if let json = String(bytes: jsonData, encoding: String.Encoding.utf8) {
+            parseResponse(response: json)
+        }
+    } catch {
+        print(error.localizedDescription)
+    }
+}
+
 func sendHeartbeat(url:String, type:String, heartbeat:String, size:Int) -> Int
 {
-    let randomNumber = TimeInterval(arc4random_uniform(UInt32(3)))
-    Thread.sleep(forTimeInterval: randomNumber)
     print("\(heartbeat)")
+
+    if let dict = convertToDictionary(text: heartbeat), let sid = dict["sid"] {
+        let randomNumber2 = TimeInterval(arc4random_uniform(UInt32(777)))
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (randomNumber2 / 1000)) {
+            receiveResponse(id: sid as! Int)
+        }
+    }
+
     return 0;
 }
 
@@ -60,10 +100,10 @@ class TimerWrapper {
     }
 
     func done() {
-        task.cancel()
         if let t = timer {
             t.invalidate()
         }
+        task.cancel()
     }
 
     @objc func update(tm: Timer) {

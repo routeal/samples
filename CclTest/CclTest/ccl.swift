@@ -423,15 +423,21 @@ struct ConvivaClientContentInformation {
     }
 }
 
-    var player: ccl_player = ccl_player()
+func parseResponse(response: String)
+{
+    ccl_parse_hearbeat(UnsafeMutablePointer(mutating: response), UInt32(response.characters.count))
+}
+
+//var player: ccl_player = ccl_player()
 
 class ConvivaClientSession {
     var session: OpaquePointer
+    var player: ccl_player
 
     init(content: ConvivaClientContentInformation) {
         session = ccl_session_create(content.metadata, nil)
 
-        //player = ccl_player()
+        player = ccl_player()
         player.get_playhead_time = get_playhead_time
         player.get_buffered_time =  get_buffered_time
         player.get_framerate = get_framerate
@@ -501,6 +507,10 @@ class ConvivaClientSession {
 
     func detach() {
         ccl_session_detach(session)
+    }
+
+    func end() {
+        ccl_session_end(session)
     }
 
     func destroy() {
