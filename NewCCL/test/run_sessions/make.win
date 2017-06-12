@@ -1,0 +1,37 @@
+CC      = cl
+LD      = link
+AR      = lib
+RM      = -del
+
+TARGET  = test_sessions.exe
+
+HEADERS = platformif.h
+SOURCES = main.c  platformif.c
+OBJECTS = $(SOURCES:.c=.obj)
+
+INC_CFLAGS = /I"..\..\src\include" /I"..\..\src\lib"
+# 4710: disable "function not inlined"
+COM_CFLAGS = /wd"4710" /wd"4820" /Wall
+REL_CFLAGS = /02
+DBG_CFLAGS = /ZI /Od /Oy /Gd /EHsc /WX
+
+INC_LDFLAGS = /libpath:"..\..\src\lib" ccl.lib
+REL_LDFLAGS = /NOLOGO /OPT:REF
+DBG_LDFLAGS = /NOLOGO /DEBUG
+
+CFLAGS  = $(INC_CFLAGS) $(COM_CFLAGS) $(DBG_CFLAGS)
+LDFLAGS = $(INC_LDFLAGS) $(DBG_LDFLAGS)
+ARFLAGS = /NOLOGO /WX
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+        $(LD) $(LDFLAGS) -out:$@ $?
+
+.c.obj:
+        $(CC) $(CFLAGS) -c -Fo$@ $<
+
+clean:
+        $(RM) *.pdb *.idb *.ilk
+        $(RM) $(OBJECTS)
+        $(RM) $(TARGET)
