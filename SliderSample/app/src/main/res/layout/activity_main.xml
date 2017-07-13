@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.routeal.slidersample.MainActivity">
+
+    <LinearLayout android:id="@+id/activity_main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp" >
+
+    <com.routeal.slidersample.SnappingSeekBar
+        android:id="@+id/seekbar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:progressColor="@color/teal500"
+        app:thumbnailColor="@color/teal300"
+        app:indicatorColor="@color/teal500"
+        app:textIndicatorColor="@color/blue_darker"
+        app:itemsArrayId="@array/seek_bar_with_different_colors_items"/>
+
+    <com.routeal.slidersample.SnappingSeekBar
+        android:id="@+id/seekbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:progressColor="@color/teal500"
+        app:thumbnailColor="@color/teal300"
+        app:indicatorColor="@color/teal500"
+        app:textIndicatorColor="@color/blue_darker"
+        app:itemsArrayId="@array/seek_bar_with_different_colors_items"/>
+
+</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
